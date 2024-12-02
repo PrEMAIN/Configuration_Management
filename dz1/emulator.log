@@ -1,0 +1,3 @@
+Логи эмулятора:
+{"timestamp": "2024-11-25 11:58:21", "action": "ls", "path": "/tmp/vfs"}
+{"timestamp": "2024-11-25 11:59:35", "action": "exit", "path": "/tmp/vfs"}
