@@ -1,4 +1,4 @@
-#!/Users/romanagarkov/VUZ/CU/dz2/venv/bin/python3.11
+#!/Users/romanagarkov/VUZ/CU/dz2/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
