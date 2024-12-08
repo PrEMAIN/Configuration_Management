@@ -6,7 +6,7 @@ from graphviz import Digraph
 def load_config():
     with open("config.yaml", "r") as file:
         return yaml.safe_load(file)
-
+        
 def check_repo_exists(repo_path):
     if os.path.exists(repo_path):
         try:
@@ -18,7 +18,19 @@ def check_repo_exists(repo_path):
     else:
         print(f"Repository not found at: {repo_path}")
         return None
-
+        
+def check_repo_exists(repo_path):
+    if os.path.exists(repo_path):
+        try:
+            repo = Repo(repo_path)
+            return repo
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+    else:
+        print(f"Repository not found at: {repo_path}")
+        return None
+        
 def analyze_commits(repo, target_file):
     if target_file == 'all' or not target_file:
         commits = list(repo.iter_commits())
@@ -26,7 +38,7 @@ def analyze_commits(repo, target_file):
         commits = list(repo.iter_commits(paths=target_file))
 
     return commits
-
+    
 def build_dependency_graph(commits, target_file):
     graph = Digraph(comment=f"Dependency Graph for {target_file}")
 
@@ -36,7 +48,7 @@ def build_dependency_graph(commits, target_file):
             graph.edge(commit.hexsha, f'{target_file}', label='modified')
 
     return graph
-
+    
 def main():
     # Загружаем конфигурацию
     config = load_config()
@@ -59,6 +71,6 @@ def main():
     output_file = f"{target_file}_dependency_graph.pdf"
     graph.render(output_file, format='pdf', cleanup=True)
     print(f"Dependency graph saved to {output_file}")
-
+    
 if __name__ == "__main__":
     main()
